@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      html {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      body {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+      }
+      #square {
+        position: absolute;
+        top: 50px;
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+      }
+    </style>
+    <script>
+      function startAnimation() {
+        const elem = document.getElementById("square");
+        const body = document.body;
+        let flagX = true;
+        let flagY = true;
+        let posX = elem.offsetLeft;
+        let posY = elem.offsetTop;
+        // console.log(posX, posY, body.offsetWidth, body.offsetHeight);
+        setInterval(() => {
+          if (posX >= body.offsetWidth) {
+            flagX = false;
+          }
+          if (posX < 0) {
+            flagX = true;
+          }
+          if (posY >= body.offsetHeight) {
+            flagY = false;
+          }
+          if (posY < 0) {
+            flagY = true;
+          }
+          if (flagX) {
+            posX = posX + 10;
+          } else {
+            posX = posX - 10;
+          }
+          if (flagY) {
+            posY = posY + 10;
+          } else {
+            posY = posY - 10;
+          }
+          //   console.log(posX, posY);
+          elem.style.left = posX + "px";
+          elem.style.top = posY + "px";
+        }, 1000);
+      }
+    </script>
+  </head>
+  <body onload="startAnimation()">
+    <div id="square"></div>
+  </body>
+</html>
